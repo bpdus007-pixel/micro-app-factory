@@ -1,0 +1,97 @@
+/* Shared design system for every micro app. Keep small; apps may add a few local rules. */
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #1b1f24;
+  --muted: #5b6470;
+  --line: #d9dee5;
+  --accent: #2557d6;
+  --accent-text: #ffffff;
+  --good: #16794a;
+  --good-bg: #e7f6ee;
+  --bad: #b42318;
+  --bad-bg: #fdecea;
+  --radius: 12px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111418;
+    --card: #1a1f25;
+    --text: #e8ebef;
+    --muted: #9aa4b0;
+    --line: #2e3640;
+    --accent: #6b93ff;
+    --accent-text: #0b0f14;
+    --good: #5fd39a;
+    --good-bg: #13291f;
+    --bad: #ff8a80;
+    --bad-bg: #3a1714;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+header.app-head { margin: 8px 0 16px; }
+header.app-head h1 { font-size: 1.5rem; margin: 0 0 4px; line-height: 1.3; }
+header.app-head p { margin: 0; color: var(--muted); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+label { display: block; font-weight: 600; margin: 12px 0 4px; }
+label:first-child { margin-top: 0; }
+.hint { font-size: .875rem; color: var(--muted); margin: 2px 0 0; }
+input, select, textarea {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-height: 44px;
+}
+textarea { min-height: 120px; resize: vertical; }
+input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.row + .row { margin-top: 12px; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+button {
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+  border-radius: 8px;
+  padding: 10px 16px;
+  min-height: 44px;
+  cursor: pointer;
+}
+button.secondary { background: transparent; color: var(--accent); }
+.result { font-size: 1.05rem; }
+.result:empty { display: none; }
+.result .big { font-size: 1.6rem; font-weight: 700; }
+.error {
+  color: var(--bad);
+  background: var(--bad-bg);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 12px;
+}
+.error:empty { display: none; }
+.ok { color: var(--good); background: var(--good-bg); border-radius: 8px; padding: 2px 8px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.table-scroll { overflow-x: auto; }
+footer.app-foot { color: var(--muted); font-size: .85rem; padding: 8px 0 32px; }
+footer.app-foot a { color: var(--accent); }

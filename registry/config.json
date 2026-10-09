@@ -1,0 +1,23 @@
+{
+  "project": "Autonomous Micro-App Factory",
+  "repo": "https://github.com/bpdus007-pixel/micro-app-factory",
+  "site_base_url": "https://bpdus007-pixel.github.io/micro-app-factory/",
+  "target_app_count": 1000,
+  "timezone": "Asia/Seoul",
+  "schedule_note": "Cloud routine 'micro-app-factory daily run' — daily 03:00 KST (cron 0 18 * * * UTC)",
+  "apps_per_run": 1,
+  "apps_per_run_max": 5,
+  "max_fix_attempts_per_app": 3,
+  "stage_thresholds": [
+    { "stage": 1, "name": "공장 구축", "until_live": 0 },
+    { "stage": 2, "name": "시범 앱 3개", "until_live": 3 },
+    { "stage": 3, "name": "누적 10개", "until_live": 10 },
+    { "stage": 4, "name": "누적 30개", "until_live": 30 },
+    { "stage": 5, "name": "누적 100개", "until_live": 100 },
+    { "stage": 6, "name": "누적 1,000개", "until_live": 1000 }
+  ],
+  "production_paused": false,
+  "paused_reason": null,
+  "monthly_spend_krw": 0,
+  "approved_spend_krw": 0
+}

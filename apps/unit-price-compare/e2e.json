@@ -1,0 +1,61 @@
+{
+  "cases": [
+    {
+      "name": "kg과 g 상품 비교 시 최저가 표시",
+      "kind": "normal",
+      "steps": [
+        { "fill": "[data-testid=name-1]", "value": "대용량" },
+        { "fill": "[data-testid=price-1]", "value": "5,000" },
+        { "fill": "[data-testid=amount-1]", "value": "1" },
+        { "select": "[data-testid=unit-1]", "value": "kg" },
+        { "fill": "[data-testid=name-2]", "value": "소용량" },
+        { "fill": "[data-testid=price-2]", "value": "1200" },
+        { "fill": "[data-testid=amount-2]", "value": "200" },
+        { "click": "[data-testid=compare]" },
+        { "expectText": "[data-testid=cheapest]", "equals": "대용량" },
+        { "expectText": "[data-testid=result]", "contains": "+20%" },
+        { "expectText": "[data-testid=error]", "equals": "" }
+      ]
+    },
+    {
+      "name": "상품 추가 후 3개 비교와 묶음 수량",
+      "kind": "boundary",
+      "steps": [
+        { "click": "[data-testid=add]" },
+        { "fill": "[data-testid=price-1]", "value": "9000" },
+        { "fill": "[data-testid=amount-1]", "value": "500" },
+        { "select": "[data-testid=unit-1]", "value": "ml" },
+        { "fill": "[data-testid=pack-1]", "value": "6" },
+        { "fill": "[data-testid=price-2]", "value": "4000" },
+        { "fill": "[data-testid=amount-2]", "value": "2" },
+        { "select": "[data-testid=unit-2]", "value": "L" },
+        { "fill": "[data-testid=name-3]", "value": "중간" },
+        { "fill": "[data-testid=price-3]", "value": "2500" },
+        { "fill": "[data-testid=amount-3]", "value": "1" },
+        { "select": "[data-testid=unit-3]", "value": "L" },
+        { "click": "[data-testid=compare]" },
+        { "expectText": "[data-testid=cheapest]", "equals": "상품 2" },
+        { "expectText": "[data-testid=result]", "contains": "100ml당" }
+      ]
+    },
+    {
+      "name": "잘못된 입력과 단위 혼합 오류",
+      "kind": "invalid",
+      "steps": [
+        { "fill": "[data-testid=price-1]", "value": "abc" },
+        { "fill": "[data-testid=amount-1]", "value": "1" },
+        { "fill": "[data-testid=price-2]", "value": "100" },
+        { "fill": "[data-testid=amount-2]", "value": "1" },
+        { "click": "[data-testid=compare]" },
+        { "expectText": "[data-testid=error]", "contains": "가격" },
+        { "fill": "[data-testid=price-1]", "value": "100" },
+        { "select": "[data-testid=unit-2]", "value": "ml" },
+        { "click": "[data-testid=compare]" },
+        { "expectText": "[data-testid=error]", "contains": "섞어서" },
+        { "click": "[data-testid=reset]" },
+        { "click": "[data-testid=compare]" },
+        { "expectText": "[data-testid=error]", "contains": "2개 이상" }
+      ]
+    }
+  ]
+}

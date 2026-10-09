@@ -1,0 +1,161 @@
+# Test → promote → deploy → verify public URLs → record status.
+# - push to claude/**: run all gates; if green, merge into main, delete the branch, then dispatch
+#   this workflow on main (Pages only accepts deploys from main; GITHUB_TOKEN pushes do not trigger runs).
+# - push to main / manual run on main: gates, deploy, verify.
+# - daily schedule: verify public URLs only (monitor), refresh dashboard data.
+# Nothing is deployed unless every gate passes; the previously deployed site stays live otherwise.
+name: pipeline
+
+on:
+  push:
+    branches: [main, 'claude/**']
+  workflow_dispatch:
+  schedule:
+    - cron: '30 21 * * *' # 06:30 KST daily live monitor
+
+permissions:
+  contents: write
+  actions: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pipeline-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+jobs:
+  gate:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: validate + unit tests + build
+        run: npm run check
+      - name: browser tests (local build)
+        run: npm run e2e
+
+  promote:
+    needs: gate
+    if: startsWith(github.ref_name, 'claude/')
+    runs-on: ubuntu-latest
+    concurrency: { group: main-writer, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@v5
+        with: { ref: main, fetch-depth: 0 }
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: npm }
+      - name: merge branch into main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "${GITHUB_REF_NAME}"
+          git merge --no-ff "origin/${GITHUB_REF_NAME}" -m "Promote ${GITHUB_REF_NAME} (all gates passed)"
+          npm ci && npm run check
+          node scripts/pipeline-status.mjs --ref "${GITHUB_REF_NAME}" --stage promote --result success --note "merged into main; deploy run dispatched" --run-url "$RUN_URL"
+          git add registry/pipeline-status.json && git commit -m "Record promotion of ${GITHUB_REF_NAME} [skip ci]"
+          git push origin main
+          git push origin --delete "${GITHUB_REF_NAME}"
+      - name: start deploy run on main
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: gh workflow run pipeline.yml --ref main --repo "${GITHUB_REPOSITORY}"
+
+  deploy:
+    needs: [gate]
+    if: github.ref == 'refs/heads/main' && github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    environment: { name: github-pages }
+    concurrency: { group: pages-deploy, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@v5
+        with: { ref: main }
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v4
+        with: { path: _site }
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  verify:
+    needs: [deploy]
+    if: always() && github.ref == 'refs/heads/main' && (needs.deploy.result == 'success' || github.event_name == 'schedule')
+    runs-on: ubuntu-latest
+    concurrency: { group: main-writer, cancel-in-progress: false }
+    outputs:
+      live_ok: ${{ steps.live.outputs.ok }}
+    steps:
+      - uses: actions/checkout@v5
+        with: { ref: main }
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: wait for Pages propagation
+        if: github.event_name != 'schedule'
+        run: sleep 45
+      - id: live
+        name: public URL browser tests
+        run: |
+          if npm run e2e:live -- --write; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+      - name: record status on main
+        run: |
+          RESULT=success; [ "${{ steps.live.outputs.ok }}" = "true" ] || RESULT=live_failed
+          node scripts/pipeline-status.mjs --ref "${GITHUB_REF_NAME}" --stage verify --result "$RESULT" --note "${{ github.event_name }}" --run-url "$RUN_URL"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry/
+          git commit -m "Record live check (${RESULT}) [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done
+
+  refresh-dashboard:
+    needs: [verify]
+    if: always() && needs.verify.result == 'success'
+    runs-on: ubuntu-latest
+    environment: { name: github-pages }
+    concurrency: { group: pages-deploy, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@v5
+        with: { ref: main }
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v4
+        with: { path: _site }
+      - uses: actions/deploy-pages@v4
+      - name: fail run if live check failed
+        if: needs.verify.outputs.live_ok != 'true'
+        run: |
+          echo "::error::Public URL browser tests failed — see registry/live-check.json"
+          exit 1
+
+  report-failure:
+    needs: [gate, promote, deploy]
+    if: always() && github.event_name != 'schedule' && (needs.gate.result == 'failure' || needs.promote.result == 'failure' || needs.deploy.result == 'failure')
+    runs-on: ubuntu-latest
+    concurrency: { group: main-writer, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@v5
+        with: { ref: main }
+      - uses: actions/setup-node@v5
+        with: { node-version: 22 }
+      - name: record failure on main
+        run: |
+          STAGE=gate
+          [ "${{ needs.promote.result }}" = "failure" ] && STAGE=promote
+          [ "${{ needs.deploy.result }}" = "failure" ] && STAGE=deploy
+          node scripts/pipeline-status.mjs --ref "${GITHUB_REF_NAME}" --stage "$STAGE" --result failure --note "${STAGE} failed; branch kept, nothing deployed" --run-url "$RUN_URL"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry/pipeline-status.json
+          git commit -m "Record pipeline failure (${STAGE}) [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 5; done

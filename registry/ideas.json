@@ -1,0 +1,379 @@
+[
+  {
+    "function_key": "unit-price-comparison",
+    "title": "단위가격 비교 계산기",
+    "category": "생활·쇼핑",
+    "function": "용량이 다른 상품을 기준 단위가격으로 비교",
+    "status": "taken",
+    "app_id": "A0001",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "date-diff-days",
+    "title": "날짜 간격·D-day 계산기",
+    "category": "날짜·일정",
+    "function": "두 날짜 사이 일수·주수, 기준일로부터 N일 후 날짜를 셈",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "working-days-count",
+    "title": "영업일 계산기",
+    "category": "업무",
+    "function": "주말(선택 시 지정 휴일 포함) 제외 영업일 수와 N영업일 후 날짜 계산",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "percent-calc",
+    "title": "퍼센트 계산기",
+    "category": "계산",
+    "function": "A의 B%, A는 B의 몇 %, 증감률, 할인 후 가격 4가지",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "vat-calc",
+    "title": "부가세 포함·별도 변환기",
+    "category": "업무·세금계산",
+    "function": "공급가액↔합계금액, 부가세 10% 분리·합산(원 단위 절사 옵션)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "loan-equal-payment-schedule",
+    "title": "대출 상환 스케줄표",
+    "category": "금융계산",
+    "function": "원리금균등·원금균등 월 상환액과 회차별 이자·잔액 표 (정보 제공용, 권유 아님)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "recipe-scaler",
+    "title": "레시피 분량 변환기",
+    "category": "음식",
+    "function": "기준 인분 레시피 재료량을 원하는 인분으로 비례 환산",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "cooking-unit-convert",
+    "title": "요리 계량 단위 변환기",
+    "category": "음식",
+    "function": "컵·큰술·작은술·ml 간 변환 (재료별 g 환산 제외)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "paint-area-estimate",
+    "title": "페인트 필요량 계산기",
+    "category": "가정·DIY",
+    "function": "벽 면적-창문/문 면적, 도포 횟수, 제품 도포율로 필요 리터·통 수",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "tile-count-estimate",
+    "title": "타일 수량 계산기",
+    "category": "가정·DIY",
+    "function": "바닥 면적과 타일 크기, 줄눈, 여유분 %로 필요 타일 장수·박스 수",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "wallpaper-roll-estimate",
+    "title": "벽지 롤 수 계산기",
+    "category": "가정·DIY",
+    "function": "벽 둘레·높이, 롤 규격, 무늬 반복으로 필요 롤 수",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "text-char-counter",
+    "title": "글자 수 세기(공백 포함·제외·바이트)",
+    "category": "문서",
+    "function": "글자수, 공백 제외, UTF-8/EUC-KR 바이트, 단어·줄 수",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "text-dedupe-lines",
+    "title": "중복 줄 제거·정렬 도구",
+    "category": "데이터정리",
+    "function": "붙여넣은 목록에서 중복 줄 제거, 정렬, 공백 정리, 개수 표시",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "csv-to-markdown-table",
+    "title": "CSV → 마크다운 표 변환기",
+    "category": "데이터정리",
+    "function": "CSV/TSV를 마크다운·HTML 표로 변환 (따옴표 필드 처리)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "case-converter",
+    "title": "영문 대소문자·표기법 변환기",
+    "category": "문서",
+    "function": "camelCase, snake_case, kebab-case, Title Case 상호 변환",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "korean-number-reader",
+    "title": "숫자 한글 금액 표기 변환기",
+    "category": "업무·문서",
+    "function": "123456 → 일십이만삼천사백오십육원, 계약서용 한자 금액 표기",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "random-team-splitter",
+    "title": "랜덤 조 편성기",
+    "category": "생산성",
+    "function": "명단을 N개 조 또는 조당 N명으로 무작위 균등 배분",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "ladder-random-picker",
+    "title": "제비뽑기·당첨자 추첨기",
+    "category": "생산성",
+    "function": "명단에서 중복 없이 N명 무작위 추첨 (crypto 난수)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "meeting-cost-timer",
+    "title": "회의 비용 계산기",
+    "category": "업무",
+    "function": "참석자 수·평균 시급·시간으로 회의 비용 계산",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "time-zone-meeting-planner",
+    "title": "시차 회의 시간 비교표",
+    "category": "업무",
+    "function": "여러 도시 시간대를 나란히 표시해 회의 가능 시간대 찾기 (Intl API)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "hourly-to-monthly-wage",
+    "title": "시급·월급·연봉 환산기",
+    "category": "업무",
+    "function": "시급↔월급(주휴 포함 209시간 기준 옵션)↔연봉 환산 (세전, 정보용)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "fuel-cost-trip",
+    "title": "주행 유류비 계산기",
+    "category": "자동차",
+    "function": "거리, 연비, 유가로 편도·왕복 유류비와 1인당 분담액",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "ev-charging-cost",
+    "title": "전기차 충전 비용 계산기",
+    "category": "자동차",
+    "function": "배터리 용량, 충전 구간 %, kWh 단가, 효율로 충전 비용·주행거리당 비용",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "tire-size-compare",
+    "title": "타이어 규격 비교 계산기",
+    "category": "자동차",
+    "function": "두 타이어 규격(205/55R16 형식)의 외경·둘레 차이와 속도계 오차",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "pet-food-portion",
+    "title": "반려견 사료 급여량 계산기",
+    "category": "반려동물",
+    "function": "체중·활동 수준으로 일일 권장 칼로리(RER×계수)와 사료 g (참고용)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "aspect-ratio-resize",
+    "title": "화면비 크기 계산기",
+    "category": "디자인",
+    "function": "원본 비율 유지하며 너비·높이 환산, 16:9 등 비율 단순화",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "color-contrast-checker",
+    "title": "색 대비 검사기(WCAG)",
+    "category": "디자인",
+    "function": "전경·배경 HEX의 명도 대비비와 AA/AAA 통과 여부",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "px-rem-converter",
+    "title": "px·rem·em·pt 변환기",
+    "category": "디자인·웹",
+    "function": "기준 폰트 크기로 px↔rem↔pt 일괄 변환표",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "print-dpi-size",
+    "title": "인쇄 해상도·크기 계산기",
+    "category": "디자인",
+    "function": "픽셀 크기와 DPI로 인쇄 cm/inch 크기, 목표 크기 필요 픽셀",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "cron-expression-explainer",
+    "title": "크론 표현식 해석기",
+    "category": "개발",
+    "function": "5필드 cron을 한국어 문장과 다음 실행 시각 5개로 설명",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "unix-time-converter",
+    "title": "유닉스 시간 변환기",
+    "category": "개발",
+    "function": "epoch 초·밀리초 ↔ 날짜(KST/UTC) 변환",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "json-formatter-validator",
+    "title": "JSON 정리·검증기",
+    "category": "개발",
+    "function": "JSON 들여쓰기 정리, 압축, 오류 위치 표시",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "regex-tester",
+    "title": "정규식 테스트 도구",
+    "category": "개발",
+    "function": "패턴과 플래그로 매치 목록, 그룹, 치환 결과 확인",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "base-convert",
+    "title": "진법 변환기",
+    "category": "계산·개발",
+    "function": "2·8·10·16진수 상호 변환 (BigInt, 음수 처리)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "used-item-price-split",
+    "title": "중고거래 수수료·실수령액 계산기",
+    "category": "중고거래",
+    "function": "판매가, 수수료율, 배송비 부담으로 실수령액·적정 판매가 역산",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "dutch-pay-calc",
+    "title": "더치페이 정산 계산기",
+    "category": "생활",
+    "function": "여러 명이 각자 낸 금액 입력 시 누가 누구에게 얼마 보내면 되는지 최소 송금 목록",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "electricity-progressive-bill",
+    "title": "주택용 전기요금 누진 계산기",
+    "category": "생활",
+    "function": "월 사용량 kWh로 구간별 요금 계산 (요금표 값은 앱 내 날짜 명시, 참고용)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "study-plan-splitter",
+    "title": "공부 분량 일정 분배기",
+    "category": "교육",
+    "function": "총 페이지·문항 수를 기간·쉬는 요일 제외해 일별 분량표로 분배",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "grade-average-calc",
+    "title": "학점 평균 계산기",
+    "category": "교육",
+    "function": "과목별 학점·성적으로 GPA(4.5/4.3 만점) 계산, 전공 평균 분리",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "reading-time-estimate",
+    "title": "읽기·발표 시간 계산기",
+    "category": "문서",
+    "function": "글자 수로 읽기 시간과 발표 소요 시간(분당 음절 기준) 추정",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "inventory-reorder-point",
+    "title": "재고 재주문점 계산기",
+    "category": "제조·업무",
+    "function": "일평균 사용량, 리드타임, 안전재고로 재주문점·주문 수량",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "production-takt-time",
+    "title": "택트타임 계산기",
+    "category": "제조",
+    "function": "가용 작업시간과 수요량으로 택트타임, 필요 인원·공정수 추정",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "cutting-stock-planner",
+    "title": "원자재 절단 배치 계산기",
+    "category": "제조·DIY",
+    "function": "정척 길이 자재에서 필요한 길이 목록을 잘라낼 때 필요한 자재 수(FFD 휴리스틱)와 배치표",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "packing-checklist-trip",
+    "title": "여행 준비물 체크리스트 생성기",
+    "category": "여행",
+    "function": "여행 일수·계절·숙박 유형 선택 시 준비물 목록 생성·체크·인쇄 (localStorage)",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "travel-budget-split",
+    "title": "여행 경비 예산 분배기",
+    "category": "여행",
+    "function": "총 예산을 숙박·식비·교통·기타 비율과 일수로 일별 예산표",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "plant-watering-schedule",
+    "title": "화분 물주기 일정표",
+    "category": "취미",
+    "function": "화분별 주기 입력 시 다음 2주 물주기 달력",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  },
+  {
+    "function_key": "knitting-gauge-calc",
+    "title": "뜨개 게이지 환산기",
+    "category": "취미",
+    "function": "게이지(10cm당 코·단)로 목표 치수 필요 코·단 수 환산",
+    "status": "queued",
+    "source": "setup-session-2026-10-09"
+  }
+]

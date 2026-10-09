@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>작은 도구 모음 — 생활·업무 계산기와 변환기</title>
+  <meta name="description" content="설치나 회원가입 없이 브라우저에서 바로 쓰는 작은 계산기, 변환기, 정리 도구 모음입니다. 입력값은 기기 밖으로 전송되지 않습니다.">
+  <link rel="stylesheet" href="apps/_shared/style.css">
+  <style>
+    .wrap { max-width: 960px; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+    .kpi { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+    .kpi .v { font-size: 1.6rem; font-weight: 700; }
+    .kpi .k { color: var(--muted); font-size: .85rem; }
+    .na { color: var(--muted); font-size: 1rem; font-weight: 600; }
+    .tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+    .tool { display: block; text-decoration: none; color: inherit; }
+    .tool:hover { border-color: var(--accent); }
+    .tool h3 { margin: 0 0 4px; font-size: 1.05rem; }
+    .tool p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .tag { display: inline-block; font-size: .75rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; margin-bottom: 6px; }
+    details > summary { cursor: pointer; font-weight: 700; font-size: 1.1rem; }
+    h2 { font-size: 1.15rem; }
+    .bar { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
+    .bar > i { display: block; height: 100%; background: var(--accent); }
+    td.s-live { color: var(--good); } td.s-bad { color: var(--bad); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="app-head">
+      <h1>작은 도구 모음</h1>
+      <p>설치·회원가입 없이 브라우저에서 바로 쓰는 계산기, 변환기, 정리 도구입니다. 입력값은 기기 밖으로 전송되지 않습니다.</p>
+    </header>
+
+    <section>
+      <input id="q" type="search" placeholder="도구 검색 (예: 가격, 날짜, 변환)" aria-label="도구 검색">
+      <div class="tools" id="tools" style="margin-top:12px"></div>
+      <p class="hint" id="tools-empty" hidden>표시할 도구가 없습니다.</p>
+    </section>
+
+    <section class="card" style="margin-top:24px">
+      <details id="ops">
+        <summary>운영 현황</summary>
+        <div style="margin-top:12px">
+          <div class="kpis" id="kpis"></div>
+          <div style="margin:16px 0 4px" id="progress-label"></div>
+          <div class="bar"><i id="progress" style="width:0"></i></div>
+
+          <h2>최근 자동 실행</h2>
+          <div class="table-scroll"><table><thead><tr><th>시각(UTC)</th><th>결과</th><th>내용</th></tr></thead><tbody id="runs"></tbody></table></div>
+
+          <h2>배포 파이프라인</h2>
+          <p id="pipeline" class="hint"></p>
+
+          <h2>전체 앱 목록</h2>
+          <div class="table-scroll"><table><thead><tr><th>ID</th><th>앱</th><th>상태</th><th>공개 URL 검증</th></tr></thead><tbody id="all"></tbody></table></div>
+          <p class="hint" id="generated"></p>
+        </div>
+      </details>
+    </section>
+    <footer class="app-foot">Autonomous Micro-App Factory</footer>
+  </main>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

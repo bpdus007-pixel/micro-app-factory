@@ -1,0 +1,19 @@
+{
+  "cases": [
+    { "name": "정상 입력", "kind": "normal", "steps": [
+      { "fill": "[data-testid=x]", "value": "3" },
+      { "click": "[data-testid=submit]" },
+      { "expectText": "[data-testid=result]", "contains": "3" }
+    ] },
+    { "name": "경계값", "kind": "boundary", "steps": [
+      { "fill": "[data-testid=x]", "value": "0" },
+      { "click": "[data-testid=submit]" },
+      { "expectText": "[data-testid=result]", "contains": "0" }
+    ] },
+    { "name": "잘못된 입력", "kind": "invalid", "steps": [
+      { "fill": "[data-testid=x]", "value": "abc" },
+      { "click": "[data-testid=submit]" },
+      { "expectText": "[data-testid=error]", "contains": "숫자" }
+    ] }
+  ]
+}

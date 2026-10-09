@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>__TITLE__</title>
+  <meta name="description" content="__SUMMARY__">
+  <link rel="stylesheet" href="../_shared/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="app-head">
+      <h1>__TITLE__</h1>
+      <p>__SUMMARY__</p>
+    </header>
+
+    <form class="card" id="form" novalidate>
+      <label for="x">값</label>
+      <input id="x" data-testid="x" type="text" inputmode="decimal" autocomplete="off">
+      <div class="actions">
+        <button type="submit" data-testid="submit">계산하기</button>
+      </div>
+      <p class="error" id="error" data-testid="error"></p>
+    </form>
+
+    <section class="card result" id="result" data-testid="result" aria-live="polite"></section>
+
+    <footer class="app-foot">입력값은 이 브라우저 안에서만 처리되며 어디에도 전송되지 않습니다. · <a href="../../">다른 도구 보기</a></footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

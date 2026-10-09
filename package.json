@@ -1,0 +1,21 @@
+{
+  "name": "micro-app-factory",
+  "private": true,
+  "type": "module",
+  "description": "Autonomous Micro-App Factory — static micro web apps, built and operated by scheduled Claude Code routines",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test \"apps/*/logic.test.js\" \"scripts/*.test.mjs\"",
+    "build": "node scripts/build-site.mjs",
+    "e2e": "node scripts/e2e.mjs",
+    "e2e:live": "node scripts/e2e.mjs --live",
+    "check": "npm run validate && npm test && npm run build",
+    "check:full": "npm run check && npm run e2e",
+    "new-app": "node scripts/new-app.mjs",
+    "status": "node scripts/status.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.0"
+  }
+}
