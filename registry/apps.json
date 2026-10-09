@@ -26,5 +26,33 @@
         "note": "public URL e2e passed"
       }
     ]
+  },
+  {
+    "id": "A0002",
+    "slug": "date-diff-days",
+    "title": "날짜 간격·D-day 계산기",
+    "category": "날짜·일정",
+    "function_key": "date-diff-days",
+    "summary": "두 날짜 사이 일수·주·개월을 계산하고, 기준일에서 며칠 뒤(전) 날짜와 요일을 알려줍니다.",
+    "spec": "입력: (1) 시작일·종료일(YYYY-MM-DD), 시작일 포함 여부 (2) 기준일, 더할 일수(정수, 음수 허용 ±100000), 기준일을 1일째로 셀지 여부. 처리: 날짜를 UTC 일 번호로 바꿔 차이=종료-시작(+1 if 시작일 포함, 부호는 방향 표시), 주=floor(|차이|/7)·나머지 일, 개월=월차(종료일 일자가 시작일 일자보다 작으면 1 감소)·잔여일=종료-(시작+개월, 말일 보정). 날짜 더하기=기준+일수(기준일 1일째면 일수-1, 음수면 +1). 출력: 총 일수, 주+일, 개월+일, 결과 날짜와 한국어 요일. 오류: 빈 날짜, 존재하지 않는 날짜(2월 30일 등), 정수가 아닌 일수, 범위 초과(0001~9999년), 1일째 계산에서 0일.",
+    "status": "ready",
+    "network_allowed": false,
+    "created_at": "2026-10-09T05:41:11Z",
+    "updated_at": "2026-10-09T05:43:51Z",
+    "tested_at": "2026-10-09T05:43:51Z",
+    "verified_at": null,
+    "attempts": 0,
+    "history": [
+      {
+        "at": "2026-10-09T05:41:11Z",
+        "event": "created",
+        "note": "scaffolded"
+      },
+      {
+        "at": "2026-10-09T05:43:51Z",
+        "event": "ready",
+        "note": "unit 7 tests pass; e2e local pass (Playwright chromium, 3 cases)"
+      }
+    ]
   }
 ]

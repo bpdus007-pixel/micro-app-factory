@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "name": "두 날짜 사이 일수·주·개월",
+      "kind": "normal",
+      "steps": [
+        { "fill": "[data-testid=start]", "value": "2026-01-01" },
+        { "fill": "[data-testid=end]", "value": "2026-12-25" },
+        { "click": "[data-testid=calc-diff]" },
+        { "expectText": "[data-testid=days-total]", "equals": "358일" },
+        { "expectText": "[data-testid=days-detail]", "equals": "51주 1일 · 11개월 24일" },
+        { "expectText": "[data-testid=result]", "contains": "2026년 12월 25일 금요일" },
+        { "expectText": "[data-testid=error]", "equals": "" }
+      ]
+    },
+    {
+      "name": "100일 기념일과 윤년 경계",
+      "kind": "boundary",
+      "steps": [
+        { "fill": "[data-testid=base]", "value": "2026-10-09" },
+        { "fill": "[data-testid=days]", "value": "100" },
+        { "check": "[data-testid=day1]" },
+        { "click": "[data-testid=calc-add]" },
+        { "expectText": "[data-testid=add-date]", "equals": "2027년 1월 16일 토요일" },
+        { "fill": "[data-testid=base]", "value": "2024-03-01" },
+        { "fill": "[data-testid=days]", "value": "-1" },
+        { "uncheck": "[data-testid=day1]" },
+        { "click": "[data-testid=calc-add]" },
+        { "expectText": "[data-testid=add-date]", "equals": "2024년 2월 29일 목요일" },
+        { "fill": "[data-testid=start]", "value": "2026-01-01" },
+        { "fill": "[data-testid=end]", "value": "2026-01-03" },
+        { "check": "[data-testid=include-start]" },
+        { "click": "[data-testid=calc-diff]" },
+        { "expectText": "[data-testid=days-total]", "equals": "3일" }
+      ]
+    },
+    {
+      "name": "빈 날짜와 잘못된 일수 오류",
+      "kind": "invalid",
+      "steps": [
+        { "fill": "[data-testid=start]", "value": "" },
+        { "fill": "[data-testid=end]", "value": "2026-01-01" },
+        { "click": "[data-testid=calc-diff]" },
+        { "expectText": "[data-testid=error]", "contains": "시작일을 입력" },
+        { "expectHidden": "[data-testid=days-total]" },
+        { "fill": "[data-testid=base]", "value": "2026-10-09" },
+        { "fill": "[data-testid=days]", "value": "1.5" },
+        { "click": "[data-testid=calc-add]" },
+        { "expectText": "[data-testid=error-add]", "contains": "정수" },
+        { "fill": "[data-testid=days]", "value": "0" },
+        { "check": "[data-testid=day1]" },
+        { "click": "[data-testid=calc-add]" },
+        { "expectText": "[data-testid=error-add]", "contains": "0일을 쓸 수 없습니다" }
+      ]
+    }
+  ]
+}
