@@ -24,7 +24,7 @@
 
 | 구성 | 내용 |
 |---|---|
-| 자동 실행 | Claude Code 클라우드 Routine **"micro-app-factory daily run"**, 매일 03:00 KST (`0 18 * * *` UTC). 관리: https://claude.ai/code/routines |
+| 자동 실행 | 소유자 PC의 Claude 데스크톱 예약 작업 **micro-app-factory-daily**, 매일 13:00 KST (작업 폴더 `C:\dev\micro-app-factory`, 로컬 Git 자격증명으로 push). PC·앱이 꺼져 있으면 다음 실행 때 실행. 클라우드 Routine 전환은 owner-requests R001 대기 |
 | 코드·상태 저장 | GitHub `bpdus007-pixel/micro-app-factory` (public). `registry/` 가 단일 진실 원천 |
 | 호스팅 | GitHub Pages (무료) — `https://bpdus007-pixel.github.io/micro-app-factory/` |
 | CI/CD | `.github/workflows/pipeline.yml` (GitHub Actions, public repo 무료) |
@@ -227,7 +227,7 @@ git show origin/main:registry/pipeline-status.json | head -40
 
 ## 12. 실행 환경 메모
 
-- 클라우드 Routine 세션은 매번 새 컨테이너에서 이 저장소를 clone 한다. 로컬 PC 파일·자격증명은 없다.
+- 현재 실행 환경은 소유자 Windows PC (Git Bash, Node 24, Playwright Chromium 설치됨). 클라우드 Routine 으로 전환되면 매번 새 컨테이너에서 clone 하며 로컬 자격증명은 없다.
 - push 는 `claude/` 브랜치에만 가능하다고 가정한다. GitHub API·`gh` CLI 는 없을 수 있다 → CI 결과는 main 의 `registry/pipeline-status.json` 으로 확인.
 - `validate`, `test`, `build` 는 Node 내장 기능만 쓰므로 `npm ci` 실패와 무관하게 동작한다. 브라우저 테스트는 CI 가 권위 있는 게이트다.
 - 사용량 한도에 걸려 실행이 중간에 끊겨도 push 전 작업은 버려질 뿐 main 은 손상되지 않는다. 다음 실행이 처음부터 다시 판단한다.

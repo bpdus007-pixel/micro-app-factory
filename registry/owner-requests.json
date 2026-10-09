@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "R001",
+    "at": "2026-10-09T05:50:00Z",
+    "status": "open",
+    "title": "Claude 계정에 GitHub 연결 (선택, 권장)",
+    "why": "현재 자동 실행은 소유자 PC의 Claude 데스크톱 예약 작업이라 PC가 꺼져 있으면 실행되지 않음. GitHub 연결 시 PC와 무관한 클라우드 Routine으로 전환 가능",
+    "action": "https://claude.ai/code 접속 → Connect GitHub → Claude 앱 설치 시 micro-app-factory 저장소만 선택 → 승인. 이후 Claude Code 세션에 '클라우드 루틴으로 전환해줘'라고 요청",
+    "cost_krw": 0,
+    "blocking": "없음 (로컬 예약 작업으로 운영 중)"
+  }
+]
