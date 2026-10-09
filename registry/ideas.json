@@ -13,8 +13,9 @@
     "title": "날짜 간격·D-day 계산기",
     "category": "날짜·일정",
     "function": "두 날짜 사이 일수·주수, 기준일로부터 N일 후 날짜를 셈",
-    "status": "queued",
-    "source": "setup-session-2026-10-09"
+    "status": "taken",
+    "source": "setup-session-2026-10-09",
+    "app_id": "A0002"
   },
   {
     "function_key": "working-days-count",

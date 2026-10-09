@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>날짜 간격·D-day 계산기 — 두 날짜 사이 며칠, 며칠 뒤 날짜</title>
+  <meta name="description" content="두 날짜 사이가 며칠·몇 주·몇 개월인지 계산하고, 기준일에서 100일 뒤·30일 전 같은 날짜와 요일을 바로 알려줍니다. 시작일 포함·기념일 계산 지원.">
+  <link rel="stylesheet" href="../_shared/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="app-head">
+      <h1>날짜 간격·D-day 계산기</h1>
+      <p>두 날짜 사이 일수·주·개월을 계산하고, 기준일에서 며칠 뒤(전) 날짜와 요일을 알려줍니다.</p>
+    </header>
+
+    <form class="card" id="form-diff" novalidate>
+      <h2 style="margin-top:0;font-size:1.1rem">두 날짜 사이 며칠?</h2>
+      <div class="row">
+        <div><label for="start">시작일</label><input id="start" data-testid="start" type="date" min="0001-01-01" max="9999-12-31"></div>
+        <div><label for="end">종료일</label><input id="end" data-testid="end" type="date" min="0001-01-01" max="9999-12-31"></div>
+      </div>
+      <label class="check" style="display:flex;align-items:center;gap:8px;min-height:44px;margin-top:8px">
+        <input id="include-start" data-testid="include-start" type="checkbox"> 시작일도 1일로 포함 (예: 1일~3일 = 3일)
+      </label>
+      <div class="actions">
+        <button type="submit" data-testid="calc-diff">간격 계산</button>
+        <button type="button" class="secondary" id="start-today" data-testid="start-today">시작일을 오늘로</button>
+      </div>
+      <p class="error" id="error" data-testid="error"></p>
+    </form>
+
+    <section class="card result" id="result" data-testid="result" aria-live="polite"></section>
+
+    <form class="card" id="form-add" novalidate>
+      <h2 style="margin-top:0;font-size:1.1rem">며칠 뒤(전)는 언제?</h2>
+      <div class="row">
+        <div><label for="base">기준일</label><input id="base" data-testid="base" type="date" min="0001-01-01" max="9999-12-31"></div>
+        <div><label for="days">일수 (이전은 음수)</label><input id="days" data-testid="days" type="text" inputmode="numeric" placeholder="예: 100 또는 -30" autocomplete="off"></div>
+      </div>
+      <label class="check" style="display:flex;align-items:center;gap:8px;min-height:44px;margin-top:8px">
+        <input id="day1" data-testid="day1" type="checkbox"> 기준일을 1일째로 계산 (기념일 방식: 100일 = 기준일 + 99일)
+      </label>
+      <div class="actions">
+        <button type="submit" data-testid="calc-add">날짜 계산</button>
+      </div>
+      <p class="error" id="error-add" data-testid="error-add"></p>
+    </form>
+
+    <section class="card result" id="result-add" data-testid="result-add" aria-live="polite"></section>
+
+    <section class="card">
+      <h2 style="margin-top:0;font-size:1.1rem">계산 방식</h2>
+      <p class="hint">일수는 종료일에서 시작일을 뺀 값입니다(예: 오늘→내일 = 1일). ‘시작일도 포함’을 켜면 1일을 더합니다. 개월 수는 같은 날짜가 돌아올 때마다 1개월로 세며, 종료일이 그 달 말일이면 한 달을 채운 것으로 봅니다(1월 31일→2월 28일 = 1개월). 윤년을 반영하며 날짜는 양력 기준입니다.</p>
+    </section>
+
+    <footer class="app-foot">입력값은 이 브라우저 안에서만 처리되며 어디에도 전송되지 않습니다. · <a href="../../">다른 도구 보기</a></footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
