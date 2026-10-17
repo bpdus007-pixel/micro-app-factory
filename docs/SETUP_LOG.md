@@ -28,3 +28,9 @@
   - 첫 실행은 권한 승인 대기로 정지 → 세션을 auto 모드로 전환, 소유자가 대기 중 승인 1회 클릭
   - 실행 결과: A0002 날짜 간격·D-day 계산기 제작 → claude/run-20261009-0540 push → CI gate 통과·main 병합·배포 → 공개 URL 검증 통과 (live, 2026-10-09T05:46:53Z)
 - 새 세션이 저장소 기록만으로 작업을 이어가는 것 확인 (예약 실행 세션은 이 대화 기억 없이 CLAUDE.md 로 A0002 완료)
+
+## 2026-10-17 클라우드 전환
+- 10/10~10/17 신규 앱 0개: 데스크톱 예약 작업이 비활성 상태(원인 기록 없음, 소유자가 끈 것 아님). GitHub Actions 일일 공개 URL 점검은 매일 성공
+- 소유자 요청으로 클라우드 Routine 생성 성공 (trig_019uja2khgmLT2bwJuFCHw5K, 매일 03:00 KST, claude-sonnet-5-5). 기본으로 붙은 MCP 커넥터(M365·Drive·Notion 등)는 제거
+- 시험 실행: A0003 타일 수량 계산기 제작·로컬 검증 통과, push 는 403 (Claude GitHub App 미설치) → owner-requests R002
+- 시험 실행이 찾은 문제: 클라우드 Chromium 이 /favicon.ico 를 요청해 콘솔 404 오류 → e2e 가 favicon 요청을 204 로 응답하도록 수정

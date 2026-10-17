@@ -80,6 +80,8 @@ async function testApp(browser, base, app, spec) {
     const cases = [{ name: '(load)', steps: [] }, ...spec.cases];
     for (const c of cases) {
       const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, isMobile: !!vp.isMobile, hasTouch: !!vp.hasTouch, locale: 'ko-KR' });
+      // Browsers request /favicon.ico on their own; apps have none, so answer it to avoid a false console error.
+      await ctx.route("**/favicon.ico", (r) => r.fulfill({ status: 204, body: "" }));
       const page = await ctx.newPage();
       const problems = [];
       page.on('console', (m) => { if (m.type() === 'error') problems.push(`console: ${m.text()}`); });
@@ -106,6 +108,8 @@ async function testApp(browser, base, app, spec) {
 
 async function testDashboard(browser, base) {
   const ctx = await browser.newContext();
+  // Browsers request /favicon.ico on their own; apps have none, so answer it to avoid a false console error.
+  await ctx.route("**/favicon.ico", (r) => r.fulfill({ status: 204, body: "" }));
   const page = await ctx.newPage();
   const errs = [];
   page.on('pageerror', (e) => errs.push(e.message));
